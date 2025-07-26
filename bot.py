@@ -1,9 +1,8 @@
-
 import telebot
 import numpy as np
 from sklearn.cluster import KMeans
 
-bot = telebot.TeleBot("8048943096:AAGRrLPQwbCDCHRd_pAyfa9L-LxcZ1-7YR0")
+bot = telebot.TeleBot(" ")
 
 equations = np.array([
     [1, 7, 10],
