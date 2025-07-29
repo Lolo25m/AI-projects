@@ -1,5 +1,6 @@
 import numpy as np
 from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
 
 # 1. Original equations: each row is (a, b, c)
 equations = np.array([
@@ -8,8 +9,7 @@ equations = np.array([
     [1, 0, 1],    # delta = 0 - 4 = -4    (Complex roots)
     [1, -3, 2],   # delta = 9 - 8 = 1     (Real roots - different)
     [1, 4, 4],    # delta = 16 - 16 = 0   (One repeated real root)
-    [1, 1, 1]     # delta = 1 - 4 = -3    (Complex roots)
-])
+    [1, 1, 1]     # delta = 1 - 4 = -3    (Complex roots)    ])
 
 # 2. Compute delta for each equation: delta = b^2 - 4ac
 delta = equations[:,1]**2 - 4*equations[:,0]*equations[:,2]
@@ -57,3 +57,32 @@ a_new, b_new, c_new = 1, 6, 5
 delta_value, group_label = predict_equation_group(a_new, b_new, c_new)
 print(f"\nNew equation: a={a_new}, b={b_new}, c={c_new}")
 print(f"Delta = {delta_value}, Classified as: {group_label}")
+
+# 9. Define colors according to delta sign:
+def get_color_label(delta_value):
+    if delta_value < 0:
+        return 'red', "Delta Negative"
+    elif delta_value == 0:
+        return 'green', "Delta Zero"
+    else:
+        return 'blue', "Delta Positive"   
+
+# 10. Plot points with colors and labels based on delta sign, not cluster number
+plt.figure(figsize=(8,2))
+for i, d in enumerate(delta):
+    x = d[0]
+    y = 0
+    color, label = get_color_label(x)
+    plt.scatter(x, y, color=color)
+    
+# 11. Plot invisible dummy points just for legend
+unique_labels = ["Delta Negative", "Delta Zero", "Delta Positive"]
+unique_colors = ['red', 'green', 'blue']
+for uc, ul in zip(unique_colors, unique_labels):
+    plt.scatter([], [], color=uc, label=ul)  # نقاط فارغة مع labels للرسم التوضيحي فقط
+
+plt.xlabel('Delta Value')
+plt.yticks([])
+plt.legend(title="Delta Classification", loc='upper right', bbox_to_anchor=(1, 1), borderaxespad=0)
+plt.title('Quadratic Equations Classification by Delta')
+plt.show()
