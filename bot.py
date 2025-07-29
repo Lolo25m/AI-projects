@@ -2,7 +2,7 @@ import telebot
 import numpy as np
 from sklearn.cluster import KMeans
 
-bot = telebot.TeleBot(" ")
+bot = telebot.TeleBot(" رمز التكوين ")
 
 equations = np.array([
     [1, 7, 10],
@@ -122,65 +122,3 @@ def handle(message):
         bot.send_message(chat_id, "اختر العملية التالية:\n1. جمع\n2. طرح\n3. تصنيف معادلة من الدرجة الثانية")
 
 bot.polling()
-
-
-"""import telebot
-
-bot = telebot.TeleBot("8048943096:AAGRrLPQwbCDCHRd_pAyfa9L-LxcZ1-7YR0")  # استبدل هذا بتوكينك
-
-@bot.message_handler(commands=['start'])
-def send_welcome(message):
-    bot.reply_to(message, "أهلاً بك! أنا بوت صغير 😄")
-
-@bot.message_handler(func=lambda message: '+' in message.text)
-def calculate_sum(message):
-    try:
-        parts = message.text.split('+')
-        num1 = float(parts[0].strip())
-        num2 = float(parts[1].strip())
-        result = num1 + num2
-        bot.reply_to(message, f"النتيجة: {result}")
-    except:
-        bot.reply_to(message, "يرجى إرسال المعادلة بالشكل الصحيح مثل: 5 + 3")
-
-bot.polling()"""
-#التتلت
-"""@bot.message_handler(func=lambda message: True)
-def calculate(message):
-    try:
-        text = message.text.strip()
-        # نتوقع أن الرسالة على شكل: رقم_1 عملية رقم_2 مثلاً: 3 + 5
-        parts = text.split()
-        if len(parts) == 3:
-            x = float(parts[0])
-            op = parts[1]
-            y = float(parts[2])
-            result = None
-            
-            if op == '+':
-                result = x + y
-            elif op == '-':
-                result = x - y
-            elif op == '*':
-                result = x * y
-            elif op == '/':
-                if y != 0:
-                    result = x / y
-                else:
-                    bot.reply_to(message, "لا يمكن القسمة على صفر")
-                    return
-            elif op == '**':
-                result = x ** y
-            else:
-                bot.reply_to(message, "عملية غير مدعومة. استخدم +, -, *, /, أو **")
-                return
-
-            bot.reply_to(message, f"لقد طلبت العملية: {x} {op} {y}\nوالنتيجة هي: {result}")
-        else:
-            bot.reply_to(message, "يرجى إرسال العملية بهذا الشكل: رقم_1 عملية رقم_2\nمثال: 3 + 5")
-    except Exception as e:
-        bot.reply_to(message, "حدث خطأ في قراءة العملية. تأكد من الصيغة المدخلة.")
-
-bot.polling()"""
-
-print("ok")
